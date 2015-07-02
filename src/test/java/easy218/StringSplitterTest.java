@@ -28,5 +28,11 @@ public class StringSplitterTest {
 		assertEquals("13", cut.getLeftSide());
 		assertEquals("32", cut.getRightSide());		
 	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void badLengthThrowsException() {
+		cut = new StringSplitter("1");
+		assertTrue(false); // should not arrive here!
+	}
 
 }

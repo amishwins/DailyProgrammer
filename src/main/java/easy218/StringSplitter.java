@@ -10,15 +10,11 @@ public class StringSplitter {
 		if (word.length() < 2) {
 			throw new IllegalArgumentException();
 		}
-		
-		// even # of digits
-		if (word.length() % 2 == 0) {
-			leftSide = word.substring(0, word.length() / 2);
-			rightSide = word.substring((word.length() / 2), word.length());
-		} else { // odd # of digits
-			leftSide = word.substring(0, word.length() / 2);
-			rightSide = word.substring((word.length() / 2) + 1, word.length());
-		}
+
+		// In case the word has an odd # of numbers, make sure the right side skips the middle digit
+		int offset = word.length() % 2 == 0 ? 0 : 1;
+		leftSide = word.substring(0, word.length() / 2);
+		rightSide = word.substring((word.length() / 2) + offset, word.length());
 	}
 	
 	public String getLeftSide() {
