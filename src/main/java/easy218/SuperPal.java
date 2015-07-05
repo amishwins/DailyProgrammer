@@ -4,6 +4,11 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+// Overall, does what the challenge asks, but not the bonus
+// Doesn't seem to hard to do the bonus - I think here using a multimap would be the smartest
+// since we want to know for which input numbers the palindrome output is identical.
+// Maybe do this part with a friend!
+
 public class SuperPal {
 	List<BigInteger> bigIntsToTest;
 	

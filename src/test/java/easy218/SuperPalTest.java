@@ -23,6 +23,7 @@ public class SuperPalTest {
 		cut.run();
 	}
 	
+	
 	@Test
 	public void uhOhNeedBigLetItSnow() {
 		assertFalse(cut.isBigIntegerAPal(new BigInteger("196196871")));
