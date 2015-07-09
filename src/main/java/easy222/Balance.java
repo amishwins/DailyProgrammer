@@ -34,7 +34,7 @@ public class Balance {
 	private void process() {
 		int pivotIndex = 1;
 		
-		while(pivotIndex < wordLength) {
+		while(pivotIndex < wordLength - 1) {
 			if(leftScore(pivotIndex) == rightScore(pivotIndex)) {
 				score = leftScore(pivotIndex);
 				leftSide = word.substring(0, pivotIndex);
