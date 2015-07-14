@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sun.org.apache.bcel.internal.generic.PUTSTATIC;
-
 public class Balance {
 	final String word;
 	final int wordLength;
