@@ -34,6 +34,8 @@ public class EelTest {
 	
 	@Test
 	public void testEnable1() {
+		long startTime = System.nanoTime();
+		
 		List<String> problemSnondWords = new ArrayList<>(); 
 		List<String> problemRriziWrods = new ArrayList<>();
 		try (BufferedReader br = Files.newReader(new File("enable1.txt"), Charsets.UTF_8)) {
@@ -52,6 +54,10 @@ public class EelTest {
 			System.exit(1);
 		}
 
+		long endTime = System.nanoTime();
+		long duration = (endTime - startTime) / 1000000;
+		System.out.println("Amish's performance: " + duration);
+		
 		assertEquals(6, problemSnondWords.size());
 		List<String> target = new ArrayList<>();
 		target.addAll(Arrays.asList("misfunctioned sanctioned snowland stanchioned synchronized synonymized".split(" ")));		
@@ -86,5 +92,62 @@ public class EelTest {
 		assertFalse(m.find());
 
 	}
+	
+	@Test
+	public void sebs() {
+		assertTrue(sebsOffensivenessRisk("synchronized", "snond"));
+		assertTrue(sebsOffensivenessRisk("misfunctioned", "snond"));
+		assertFalse(sebsOffensivenessRisk("mispronounced", "snond"));
+		assertFalse(sebsOffensivenessRisk("shotgunned", "snond"));
+		assertTrue(sebsOffensivenessRisk("snond", "snond"));
+	}
+	
+	@Test
+	public void sebsEnable1() {
+		long startTime = System.nanoTime();
+		List<String> problemSnondWords = new ArrayList<>(); 
+		List<String> problemRriziWrods = new ArrayList<>();
+		try (BufferedReader br = Files.newReader(new File("enable1.txt"), Charsets.UTF_8)) {
+			String word;
+			while ((word = br.readLine()) != null) {
+				if (sebsOffensivenessRisk(word, "snond")) {
+					problemSnondWords.add(word);
+				}
+				if (sebsOffensivenessRisk(word, "rrizi")) {
+					problemRriziWrods.add(word);
+				}
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+
+		long endTime = System.nanoTime();
+		long duration = (endTime - startTime) / 1000000;
+		System.out.println("Seb's performance: " + duration);
+		
+		assertEquals(6, problemSnondWords.size());
+		List<String> target = new ArrayList<>();
+		target.addAll(Arrays.asList("misfunctioned sanctioned snowland stanchioned synchronized synonymized".split(" ")));		
+		assertEquals(target, problemSnondWords);
+		assertEquals(101, problemRriziWrods.size());
+		
+		
+	}
+	
+	boolean sebsOffensivenessRisk(String puzzleWord, String offensiveWord) {
+		
+		for (int i = 0; i < puzzleWord.length(); i++) {
+			if (offensiveWord.indexOf(puzzleWord.charAt(i)) == -1) {
+				Character letter = puzzleWord.charAt(i);
+				String letterToRemove = letter.toString();
+				puzzleWord = puzzleWord.replaceAll(letterToRemove, "");
+				i--;
+			}
+		}
+		return (puzzleWord.equals(offensiveWord));
+	}
+	
 
 }
