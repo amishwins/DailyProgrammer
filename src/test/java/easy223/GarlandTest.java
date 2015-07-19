@@ -45,8 +45,8 @@ public class GarlandTest {
 			}
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.exit(1);
 		}
 
 		assertEquals(5, highestDegree);
