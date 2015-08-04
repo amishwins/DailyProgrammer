@@ -13,11 +13,13 @@ public class TextReader {
 	
 	List<String> regexesToProcess;
 	String filename;
+	String resultingText;
 	
 	public TextReader() {
 		populateRegexes();
 	}
 	
+	// I don't like this design. poo
 	public void registerText(String filename) {
 		this.filename = filename;
 	}
@@ -25,6 +27,7 @@ public class TextReader {
 	private void populateRegexes() {
 		// must process in this order
 		regexesToProcess = new ArrayList<>();
+		regexesToProcess.add("([|]\\s+?[|])"); // remove empty
 		regexesToProcess.add("^([|].*?[+].*?[+])"); // left mixed
 		regexesToProcess.add("([+].*?[+].*?[|])$"); // right mixed
 		regexesToProcess.add("^([+|].*?[+|])"); // left feature
@@ -32,26 +35,35 @@ public class TextReader {
 	}
 
 	
-	String processAll(String input) {
+	String processLine(String input) {
 		String result = input;
 		for(String regex: regexesToProcess) {
 			result = result.replaceAll(regex, "").trim();
 		}
-		
-		return result;
+		return result.trim();
 	}
 	
 	
-	void processText() {
+	String processText() {
+		StringBuilder sb = new StringBuilder();
 		try (BufferedReader br = Files.newReader(new File(filename), Charsets.UTF_8)) {
 			String line;
 			
-			// why need this?
+			// why need this? Just read it so we don't process it
 			int numberOfLinesToRead = Integer.valueOf(br.readLine());
 			
 			while ((line = br.readLine()) != null) {
 				// store this and then process later!
-				System.out.println(processAll(line));
+				// System.out.println(processLine(line));
+				line = processLine(line);
+				if (line.trim().isEmpty()) {
+					sb.append("\n");
+
+				} else {
+					sb.append(
+							line.endsWith("-") ? line.substring(0, line.length() - 1) : line  + " "
+					);
+				}
 				
 			}
 			
@@ -59,6 +71,7 @@ public class TextReader {
 			e.printStackTrace();
 			System.exit(1);
 		}
+		return sb.toString().trim();
 	}
 	
 	
