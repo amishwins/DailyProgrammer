@@ -20,8 +20,7 @@ public class FractionAdderTest {
 		fa = new FractionAdder();
 		Fraction result = fa.addAndReduce(inputFractions);
 		
-		assertEquals(new Fraction(7, 15), result);
-		
+		assertEquals(new Fraction(7, 15), result);		
 	}
 
 	@Test
@@ -34,8 +33,7 @@ public class FractionAdderTest {
 		fa = new FractionAdder();
 		Fraction result = fa.addAndReduce(inputFractions);
 		
-		assertEquals(new Fraction(2, 3), result);
-		
+		assertEquals(new Fraction(2, 3), result);		
 	}
 
 	@Test
@@ -70,7 +68,4 @@ public class FractionAdderTest {
 		fa = new FractionAdder();
 		assertEquals(new Fraction(351910816163l, 29794134720l), fa.addAndReduce(inputFractions));
 	}
-
-	
-
 }

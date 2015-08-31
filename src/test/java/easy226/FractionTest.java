@@ -1,9 +1,7 @@
 package easy226;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 public class FractionTest {
@@ -15,6 +13,11 @@ public class FractionTest {
 		f = new Fraction(1, 2);
 		assertEquals(f.numerator, 1);
 		assertEquals(f.denominator, 2);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void illegalDenominator() {
+		f = new Fraction(1, 0);
 	}
 
 }

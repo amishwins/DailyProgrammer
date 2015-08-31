@@ -5,6 +5,9 @@ public class Fraction {
 	final long numerator;
 	final long denominator;
 	public Fraction(long numerator, long denominator) {
+		if (denominator == 0) {
+			throw new IllegalArgumentException("You can do better than that");
+		}
 		this.numerator = numerator;
 		this.denominator = denominator;
 	}

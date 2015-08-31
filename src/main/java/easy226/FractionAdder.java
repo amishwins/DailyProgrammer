@@ -57,6 +57,8 @@ public class FractionAdder {
 			return second;
 		} else if (second == 0) {
 			return first;
+		} else if (first < 0 || second < 0) {
+			throw new IllegalStateException("Not sure what happened, but you subtracted bad. First: " + first + ". Second: " + second);
 		} else {
 			long larger = Math.max(first, second);
 			long smaller = Math.min(first, second);
